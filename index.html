@@ -2,138 +2,127 @@
 <html lang="mn">
 <head>
 <meta charset="UTF-8">
-<title>Болзооны урилга 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💖 Болзоо 💖</title>
 
 <style>
 body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #ffd1dc, #ffe6f0);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Comic Sans MS", cursive;
-  overflow: hidden;
+    font-family: "Comic Sans MS", cursive;
+    background: #fff0f5;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
-.card {
-  background: white;
-  width: 350px;
-  padding: 25px;
-  border-radius: 25px;
-  text-align: center;
-  box-shadow: 0 15px 30px rgba(255,105,180,0.3);
-  z-index: 2;
+.top {
+    background: pink;
+    padding: 15px;
+    font-size: 24px;
 }
 
-.hidden { display: none; }
-
-label {
-  display: block;
-  background: #ffe6f0;
-  padding: 10px;
-  border-radius: 12px;
-  margin: 8px 0;
-  cursor: pointer;
+.bottom {
+    background: #ffd6e8;
+    padding: 15px;
+    font-size: 28px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
-label:hover { background: #ffb6c1; }
+.box {
+    margin-top: 40px;
+    padding-bottom: 100px;
+}
 
 button {
-  margin-top: 15px;
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 20px;
-  background: #ff69b4;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+    padding: 12px 20px;
+    margin: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 20px;
+    background: hotpink;
+    color: white;
+}
+
+button:hover {
+    background: deeppink;
 }
 
 .heart {
-  position: absolute;
-  bottom: -20px;
-  font-size: 20px;
-  animation: float 6s infinite;
+    position: fixed;
+    animation: floatUp 3s linear;
+    font-size: 24px;
 }
 
-@keyframes float {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-100vh); opacity: 0; }
+@keyframes floatUp {
+    from { bottom: 0; opacity: 1; }
+    to { bottom: 100%; opacity: 0; }
 }
 </style>
-
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-(function(){
-  emailjs.init("YOUR_PUBLIC_KEY");
-})();
-
-let name = "";
-let day = "";
-
-function start(){
-  name = document.getElementById("name").value;
-  if(!name){ alert("Нэрээ бичээрэй 🥺"); return; }
-  document.getElementById("q0").classList.add("hidden");
-  document.getElementById("q1").classList.remove("hidden");
-}
-
-function yes(){
-  document.getElementById("q1").classList.add("hidden");
-  document.getElementById("q2").classList.remove("hidden");
-}
-
-function no(btn){
-  btn.style.position="absolute";
-  btn.style.left=Math.random()*200+"px";
-  btn.style.top=Math.random()*200+"px";
-}
-
-function choose(d){
-  day=d;
-  emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{
-    user_name: name,
-    answer_day: day
-  }).then(()=>{
-    alert("Илгээгдлээ 💖");
-  });
-}
-
-setInterval(()=>{
-  const h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="💖";
-  h.style.left=Math.random()*100+"vw";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
-},500);
-</script>
 </head>
 
 <body>
 
-<div class="card">
-  <div id="q0">
-    <h2>💌 Сайн уу</h2>
-    <p>Нэрээ бичээрэй 🥰</p>
-    <input id="name" style="width:100%;padding:8px;border-radius:10px;border:1px solid #ccc;">
-    <button onclick="start()">Үргэлжлүүлэх 💕</button>
-  </div>
+<div class="top">💕 💕 💕 💕 💕</div>
 
-  <div id="q1" class="hidden">
-    <p><strong>1. Надтай 1 сарын 4 эсвэл 5-нд болзоонд явах уу?</strong></p>
-    <label onclick="yes()">Тийм 💗</label>
-    <label onclick="no(this)">Үгүй 🥺</label>
-  </div>
+<div class="box">
 
-  <div id="q2" class="hidden">
-    <p><strong>2. Аль өдөр нь тохиромжтой вэ?</strong></p>
-    <label onclick="choose('4')">4 🌸</label>
-    <label onclick="choose('5')">5 🌷</label>
-  </div>
+<div id="q1">
+    <h2>Цогтбилэг та Мичидмаатай болзоонд явахыг зөвшөөрч байна уу?</h2>
+    <button onclick="yesQ1()">Тийм</button>
+    <button onclick="alert('😢 За тэгвэл дууслаа')">Үгүй</button>
 </div>
+
+<div id="q2" style="display:none;">
+    <h2>Та доорх өдрүүдээс аль өдөрт завтай вэ?</h2>
+    <button onclick="next()">4</button>
+    <button onclick="next()">5</button>
+    <button onclick="next()">6</button>
+</div>
+
+<div id="q3" style="display:none;">
+    <h2>Та Мичидмаад хэр их хайртай вэ?</h2>
+    <button onclick="finish()">Мааааааш их хайртай 💖</button>
+    <button onclick="finish()">Яахав жоохон л 💕</button>
+    <button onclick="finish()">Ооооогт хайргүй 💔</button>
+</div>
+
+<div id="end" style="display:none;">
+    <h2>💌 Хариулт өгсөнд баярлалаа 💌</h2>
+</div>
+
+</div>
+
+<div class="bottom">🧸 🧸 🧸 🧸 🧸</div>
+
+<script>
+function yesQ1() {
+    document.getElementById("q1").style.display = "none";
+    document.getElementById("q2").style.display = "block";
+    sendHeart();
+}
+
+function next() {
+    document.getElementById("q2").style.display = "none";
+    document.getElementById("q3").style.display = "block";
+}
+
+function finish() {
+    document.getElementById("q3").style.display = "none";
+    document.getElementById("end").style.display = "block";
+    sendHeart();
+}
+
+function sendHeart() {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "%";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 3000);
+}
+</script>
 
 </body>
 </html>
